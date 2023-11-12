@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Haluu</title>
+    <link rel="icon" href="image/My own logo.png">
+</head>
+<style>
+    * {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    body {
+        background-image: linear-gradient(50deg, red, blue);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+    }
+
+    input{
+        border-radius: 50px;
+    }
+
+    label{
+        padding: 10px 15px;
+    }
+
+    button {
+        padding: 16px 25px;
+        border-radius: 9px;
+        background-color:deepskyblue;
+        border: none;
+        font-family: inherit;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.2s;
+        position: absolute;
+        top: 350px;
+        left: 70%;
+        box-shadow: 10px 10px 5px;
+    }
+
+    button:hover {
+        background-color: aquamarine;
+    }
+
+    button:active {
+        background-color: greenyellow;
+    }
+
+    label {
+        font-weight: 100;
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 60%;
+        padding: 20px 20px;
+        background-color: bisque;
+    }
+
+    main {
+        width: 50%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    select,
+    input {
+        width: 50%;
+        padding: 10px;
+        margin-top: 15px;
+    }
+
+    #quantity, #coke, #pepsi {
+        display: none;
+        border-radius: 50px;
+    }
+
+    #product{
+        border-radius: 50px;
+    }
+</style>
+<script>
+    function sumx() {
+        let ope = document.getElementById('ope').value;
+        let first_num = parseInt(document.getElementById('fst_num').value);
+        let second_num = parseInt(document.getElementById('scd_num').value);
+        let result;
+
+        if (ope === "+") {
+            result = first_num + second_num;
+        } else if (ope === "-") {
+            result = first_num - second_num;
+        } else if (ope === "*") {
+            result = first_num * second_num;
+        } else if (ope === "/") {
+            if (second_num !== 0) {
+                result = first_num / second_num;
+            } else {
+                result = "Division by zero is not allowed";
+            }
+        } else {
+            result = "INVALID";
+        }
+
+        document.getElementById('output').innerHTML = result;
+    }
+
+    function selectProd() {
+        let product = document.getElementById('product').value;
+        if (product == "coke") {
+            document.getElementById('coke').style.display = "block";
+            document.getElementById('quantity').style.display = "block";
+            document.getElementById('pepsi').style.display = "none";
+        } else if (product == "pepsi") {
+            document.getElementById('pepsi').style.display = "block";
+            document.getElementById('quantity').style.display = "block";
+            document.getElementById('coke').style.display = "none";
+        } else {
+            alert("Invalid");
+        }
+    }
+
+    function computeOrderCoke() {
+        let productCoke = document.getElementById('coke').value;
+        let quantity = parseInt(document.getElementById('quantity').value);
+        if (productCoke == "coke_regular") {
+            let total = quantity * 15;
+            document.getElementById('total').textContent = total + " Php";
+        } else if (productCoke == "coke_zero") {
+            let total = quantity * 25;
+            document.getElementById('total').textContent = total + " Php";
+        } else if (productCoke == "coke_light") {
+            let total = quantity * 20;
+            document.getElementById('total').textContent = total + " Php";
+        } else {
+            alert("Invalid input");
+        }
+    }
+
+    function computeOrderPepsi() {
+        let productPepsi = document.getElementById('pepsi').value;
+        let quantity = parseInt(document.getElementById('quantity').value);
+        if (productPepsi == "pepsi_regular") {
+            let total = quantity * 15;
+            document.getElementById('total').textContent = total + " Php";
+        } else if (productPepsi == "pepsi_black") {
+            let total = quantity * 25;
+            document.getElementById('total').textContent = total + " Php";
+        } else if (productPepsi == "pepsi_blue") {
+            let total = quantity * 20;
+            document.getElementById('total').textContent = total + " Php";
+        } else {
+            alert("Invalid input");
+        }
+    }
+</script>
+
+<body onload="alert('Welcome');">
+    <header>
+        <h1 class="calu">BASIC Calculator</h1>
+    </header>
+    <h1>Answer: <span id="output"></span></h1>
+    <label>OPERATION: </label>
+    <input type="text" id="ope"><br>
+    <label>FIRST NUMBER: </label>
+    <input type="text" id="fst_num"><br>
+    <label>SECOND NUMBER: </label>
+    <input type="text" id="scd_num">
+    <button onclick="sumx()">COMPUTE</button>
+    <main>
+        <h1>Simple Order Calculator</h1>
+        <h2>Total Amount: <span id="total"></span></h2>
+        <select id="product" onchange="selectProd()">
+            <option value="null"></option>
+            <option value="coke">Coke</option>
+            <option value="pepsi">Pepsi</option>
+        </select>
+        <input type="number" id="quantity">
+        <select id="coke" class="prod_type" onchange="computeOrderCoke()">
+            <option value="coke_regular">Coke Regular</option>
+            <option value="coke_zero">Coke Zero</option>
+            <option value="coke_light">Coke Light</option>
+        </select>
+        <select id="pepsi" class="prod_type" onchange="computeOrderPepsi()">
+            <option value="pepsi_regular">Pepsi Regular</option>
+            <option value="pepsi_black">Pepsi Black</option>
+            <option value="pepsi_blue">Pepsi Blue</option>
+        </select>
+    </main>
+    <footer>
+        <p>Developed by Clent John Caseria | &copy 2023</p>
+    </footer>
+</body>
+
+</html>
